@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Class Fund v2 🏦</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.11.0/dist/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;font-family:'Kanit','Sarabun',sans-serif;background:#070b1a;color:#dde5ff;overflow-x:hidden}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideIn{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:translateX(0)}}
+@keyframes pulse{0%,100%{opacity:.8}50%{opacity:.2}}
+@keyframes crown{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-6px) rotate(8deg)}}
+@keyframes particle{0%{transform:translate(0,0) scale(1);opacity:.9}100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0}}
+@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+@keyframes confetti{0%{transform:translateY(-20px) rotate(0);opacity:1}100%{transform:translateY(100vh) rotate(600deg);opacity:0}}
+@keyframes goldGlow{0%,100%{box-shadow:0 0 20px rgba(245,200,66,.4),0 0 50px rgba(245,200,66,.15)}50%{box-shadow:0 0 40px rgba(245,200,66,.8),0 0 100px rgba(245,200,66,.4)}}
+@keyframes silverGlow{0%,100%{box-shadow:0 0 12px rgba(192,192,192,.25)}50%{box-shadow:0 0 25px rgba(192,192,192,.5)}}
+@keyframes bronzeGlow{0%,100%{box-shadow:0 0 10px rgba(205,127,50,.3)}50%{box-shadow:0 0 22px rgba(205,127,50,.6)}}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes floatY2{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes balancePulse{0%,100%{text-shadow:0 0 14px rgba(0,220,100,.35)}50%{text-shadow:0 0 32px rgba(0,220,100,.8)}}
+@keyframes aiSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes aiPop{0%{transform:scale(.7);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+@keyframes swipeHint{0%,100%{transform:translateX(0);opacity:.6}50%{transform:translateX(8px);opacity:1}}
+.glass{background:rgba(255,255,255,.045);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.09);border-radius:16px}
+.card-ho{transition:transform .2s,box-shadow .2s}
+.card-ho:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.5)}
+.btn-p{background:linear-gradient(135deg,#00d4ff,#006fff);color:#fff;border:none;padding:12px 26px;border-radius:12px;font-family:'Kanit',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 7px 24px rgba(0,212,255,.4)}
+.btn-p:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-d{background:linear-gradient(135deg,#ff4444,#cc0000);color:#fff;border:none;padding:7px 14px;border-radius:9px;font-family:'Kanit',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-d:hover{box-shadow:0 4px 16px rgba(255,68,68,.4)}
+.btn-s{background:linear-gradient(135deg,#00cc66,#009944);color:#fff;border:none;padding:7px 14px;border-radius:9px;font-family:'Kanit',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-s:hover{box-shadow:0 4px 16px rgba(0,204,102,.4)}
+.btn-g{background:rgba(255,255,255,.07);color:#dde5ff;border:1px solid rgba(255,255,255,.13);padding:8px 16px;border-radius:9px;font-family:'Kanit',sans-serif;font-size:13px;cursor:pointer;transition:all .2s}
+.btn-g:hover{background:rgba(255,255,255,.12)}
+.btn-warn{background:rgba(255,200,0,.12);color:#ffc800;border:1px solid rgba(255,200,0,.25);padding:7px 14px;border-radius:9px;font-family:'Kanit',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-warn:hover{background:rgba(255,200,0,.2)}
+input,select,textarea{background:rgba(255,255,255,.065);border:1px solid rgba(255,255,255,.13);border-radius:10px;padding:10px 14px;color:#dde5ff;font-family:'Kanit',sans-serif;font-size:14px;outline:none;width:100%;transition:border-color .2s,box-shadow .2s}
+input:focus,select:focus,textarea:focus{border-color:#00d4ff;box-shadow:0 0 0 3px rgba(0,212,255,.15)}
+input::placeholder{color:rgba(255,255,255,.28)}
+select option{background:#0d1230}
+.bv{background:rgba(0,220,100,.15);color:#00dc64;border:1px solid rgba(0,220,100,.3);padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;display:inline-block}
+.bp{background:rgba(255,200,0,.15);color:#ffc800;border:1px solid rgba(255,200,0,.3);padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;display:inline-block}
+.bu{background:rgba(255,80,80,.15);color:#ff5050;border:1px solid rgba(255,80,80,.3);padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;display:inline-block}
+.bai-real{background:rgba(0,220,100,.12);color:#00dc64;border:1px solid rgba(0,220,100,.28);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;display:inline-flex;align-items:center;gap:4px}
+.bai-sus{background:rgba(255,200,0,.12);color:#ffc800;border:1px solid rgba(255,200,0,.28);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;display:inline-flex;align-items:center;gap:4px}
+.bai-fake{background:rgba(255,60,60,.12);color:#ff5050;border:1px solid rgba(255,60,60,.28);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;display:inline-flex;align-items:center;gap:4px}
+.bai-err{background:rgba(140,140,140,.12);color:#aaa;border:1px solid rgba(140,140,140,.2);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;display:inline-flex;align-items:center;gap:4px}
+.tab{padding:8px 15px;border-radius:10px;cursor:pointer;transition:all .2s;font-size:12px;font-weight:500;color:rgba(255,255,255,.42);border:none;background:none;font-family:'Kanit',sans-serif;white-space:nowrap}
+.tab:hover{color:rgba(255,255,255,.75);background:rgba(255,255,255,.06)}
+.tab.on{background:rgba(0,212,255,.15);color:#00d4ff;font-weight:600}
+.bnav{display:flex;border-top:1px solid rgba(255,255,255,.07);background:rgba(0,0,0,.3);backdrop-filter:blur(10px)}
+.bni{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px 10px;font-size:10px;color:rgba(255,255,255,.35);cursor:pointer;transition:all .2s;border:none;background:none;font-family:'Kanit',sans-serif}
+.bni.on{color:#00d4ff}
+.bni:hover{color:rgba(255,255,255,.7)}
+.bni i{font-size:20px}
+.r1{animation:goldGlow 2.5s ease-in-out infinite,floatY 3s ease-in-out infinite}
+.r2{animation:silverGlow 3s ease-in-out infinite,floatY 3.5s ease-in-out infinite}
+.r3{animation:bronzeGlow 3.5s ease-in-out infinite,floatY2 4s ease-in-out infinite}
+.num{font-family:'Outfit',sans-serif;font-variant-numeric:tabular-nums}
+.num-lg{font-family:'Outfit',sans-serif;font-size:30px;font-weight:800;letter-spacing:-1px}
+.num-md{font-family:'Outfit',sans-serif;font-size:22px;font-weight:700;letter-spacing:-.5px}
+.num-sm{font-family:'Outfit',sans-serif;font-size:15px;font-weight:600}
+.num-rank{font-family:'Outfit',sans-serif;font-weight:900;letter-spacing:-1.5px}
+.exp-sel{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 15px;cursor:pointer;transition:all .2s;user-select:none}
+.exp-sel:hover{border-color:rgba(0,212,255,.4);background:rgba(0,212,255,.05)}
+.exp-sel.on{border-color:#00d4ff;background:rgba(0,212,255,.1)}
+.exp-sel.paid{opacity:.45;cursor:default}
+.chk{width:21px;height:21px;border-radius:50%;border:1.5px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.chk.on{background:rgba(0,212,255,.8);border-color:#00d4ff}
+.ai-card{border-radius:12px;padding:13px 15px;border:1px solid;transition:all .3s}
+.ai-real{background:rgba(0,220,100,.07);border-color:rgba(0,220,100,.25)}
+.ai-sus{background:rgba(255,200,0,.07);border-color:rgba(255,200,0,.25)}
+.ai-fake{background:rgba(255,60,60,.07);border-color:rgba(255,60,60,.25)}
+.ai-loading{background:rgba(0,212,255,.05);border-color:rgba(0,212,255,.2)}
+.ai-err{background:rgba(140,140,140,.07);border-color:rgba(140,140,140,.2)}
+.slip-zone{border:2px dashed rgba(255,255,255,.15);border-radius:12px;padding:22px;text-align:center;cursor:pointer;transition:all .2s}
+.slip-zone:hover{border-color:#00d4ff;background:rgba(0,212,255,.04)}
+.slip-zone.has{border-color:rgba(0,220,100,.5);background:rgba(0,220,100,.05);border-style:solid}
+.slip-zone.fake{border-color:rgba(255,60,60,.5);background:rgba(255,60,60,.05)}
+.pbar{height:8px;background:rgba(255,255,255,.07);border-radius:4px;overflow:hidden}
+.pbar-fill{height:100%;border-radius:4px;transition:width 1s cubic-bezier(.34,1.2,.64,1)}
+.seg{display:flex;height:7px;border-radius:4px;overflow:hidden}
+.swipe-area{position:relative;overflow:hidden;touch-action:pan-y}
+::-webkit-scrollbar{width:3px;height:3px}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:2px}
+@media(max-width:680px){.pay-grid{grid-template-columns:1fr!important}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPA_URL='https://rybylsxzwbjfsxyobffd.supabase.co';
+const SUPA_KEY='sb_publishable_0GPxGTRk9ujIY6mYdh6Lag_xREO39Un';
+const ADMIN_PASS='TtKk0814414064';
+const QR_IMG='html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class Fund 🏦</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;font-family:'Kanit','Sarabun',sans-serif;background:#070b1a;color:#dde5ff;overflow-x:hidden}
+@keyframes goldGlow{0%,100%{box-shadow:0 0 22px rgba(245,200,66,.45),0 0 55px rgba(245,200,66,.2)}50%{box-shadow:0 0 45px rgba(245,200,66,.9),0 0 110px rgba(245,200,66,.5)}}
+@keyframes silverGlow{0%,100%{box-shadow:0 0 15px rgba(192,192,192,.3)}50%{box-shadow:0 0 30px rgba(192,192,192,.6),0 0 60px rgba(192,192,192,.3)}}
+@keyframes bronzeGlow{0%,100%{box-shadow:0 0 12px rgba(205,127,50,.35)}50%{box-shadow:0 0 25px rgba(205,127,50,.65)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes float2{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes float3{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes particle{0%{transform:translate(0,0) scale(1);opacity:.9}100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0}}
+@keyframes fadeUp{from{transform:translateY(24px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes slideIn{from{transform:translateX(-18px);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes rankPop{0%{transform:scale(0) rotate(-200deg);opacity:0}60%{transform:scale(1.35) rotate(12deg)}100%{transform:scale(1) rotate(0);opacity:1}}
+@keyframes pulse{0%,100%{opacity:.85}50%{opacity:.2}}
+@keyframes crown{0%,100%{transform:translateY(0) rotate(-8deg) scale(1)}50%{transform:translateY(-7px) rotate(8deg) scale(1.15)}}
+@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+@keyframes confettiFall{0%{transform:translateY(-30px) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
+@keyframes qrPulse{0%,100%{box-shadow:0 0 0 0 rgba(0,212,255,.5)}50%{box-shadow:0 0 0 14px rgba(0,212,255,0)}}
+@keyframes balancePulse{0%,100%{text-shadow:0 0 18px rgba(0,220,100,.4)}50%{text-shadow:0 0 38px rgba(0,220,100,.9)}}
+@keyframes numIn{from{transform:translateY(8px);opacity:0}to{transform:translateY(0);opacity:1}}
+.glass{background:rgba(255,255,255,.045);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.09);border-radius:16px}
+.card-ho{transition:transform .22s,box-shadow .22s;cursor:pointer}
+.card-ho:hover{transform:translateY(-4px);box-shadow:0 14px 45px rgba(0,0,0,.5)}
+.btn-p{background:linear-gradient(135deg,#00d4ff,#006fff);color:#fff;border:none;padding:12px 28px;border-radius:12px;font-family:'Kanit',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,212,255,.45)}
+.btn-d{background:linear-gradient(135deg,#ff4444,#cc0000);color:#fff;border:none;padding:8px 16px;border-radius:10px;font-family:'Kanit',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-d:hover{box-shadow:0 5px 18px rgba(255,68,68,.45)}
+.btn-s{background:linear-gradient(135deg,#00cc66,#009944);color:#fff;border:none;padding:8px 16px;border-radius:10px;font-family:'Kanit',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-s:hover{box-shadow:0 5px 18px rgba(0,204,102,.45)}
+.btn-g{background:rgba(255,255,255,.07);color:#dde5ff;border:1px solid rgba(255,255,255,.13);padding:9px 18px;border-radius:10px;font-family:'Kanit',sans-serif;font-size:13px;cursor:pointer;transition:all .2s}
+.btn-g:hover{background:rgba(255,255,255,.12)}
+input,select,textarea{background:rgba(255,255,255,.065);border:1px solid rgba(255,255,255,.13);border-radius:10px;padding:10px 14px;color:#dde5ff;font-family:'Kanit',sans-serif;font-size:14px;outline:none;width:100%;transition:border-color .2s,box-shadow .2s}
+input:focus,select:focus,textarea:focus{border-color:#00d4ff;box-shadow:0 0 0 3px rgba(0,212,255,.18)}
+input::placeholder,textarea::placeholder{color:rgba(255,255,255,.28)}
+select option{background:#0d1230}
+.bv{background:rgba(0,220,100,.15);color:#00dc64;border:1px solid rgba(0,220,100,.32);padding:2px 11px;border-radius:20px;font-size:12px;font-weight:600;display:inline-block}
+.bp{background:rgba(255,200,0,.15);color:#ffc800;border:1px solid rgba(255,200,0,.32);padding:2px 11px;border-radius:20px;font-size:12px;font-weight:600;display:inline-block}
+.bu{background:rgba(255,80,80,.15);color:#ff5050;border:1px solid rgba(255,80,80,.32);padding:2px 11px;border-radius:20px;font-size:12px;font-weight:600;display:inline-block}
+.tab{padding:9px 17px;border-radius:10px;cursor:pointer;transition:all .2s;font-size:13px;font-weight:500;color:rgba(255,255,255,.45);border:none;background:none;font-family:'Kanit',sans-serif;white-space:nowrap}
+.tab:hover{color:rgba(255,255,255,.8);background:rgba(255,255,255,.06)}
+.tab.on{background:rgba(0,212,255,.16);color:#00d4ff;font-weight:600}
+.r1{animation:goldGlow 2.5s ease-in-out infinite,float 3s ease-in-out infinite}
+.r2{animation:silverGlow 3s ease-in-out infinite,float2 3.6s ease-in-out infinite}
+.r3{animation:bronzeGlow 3.5s ease-in-out infinite,float3 4.2s ease-in-out infinite}
+/* Outfit = clean modern numerals */
+.num{font-family:'Outfit',sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.3px}
+.num-lg{font-family:'Outfit',sans-serif;font-size:32px;font-weight:800;letter-spacing:-1px;font-variant-numeric:tabular-nums}
+.num-md{font-family:'Outfit',sans-serif;font-size:22px;font-weight:700;letter-spacing:-.5px}
+.num-sm{font-family:'Outfit',sans-serif;font-size:16px;font-weight:600;letter-spacing:-.3px}
+.num-rank{font-family:'Outfit',sans-serif;font-weight:900;letter-spacing:-1.5px;font-variant-numeric:tabular-nums}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.16);border-radius:2px}
+
+/* ── Responsive ── */
+.pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start;max-width:960px}
+@media(max-width:680px){
+  .pay-grid{grid-template-columns:1fr!important}
+  .pay-chart-sticky{position:static!important}
+}
+
+/* ── Motion / Morph ── */
+@keyframes morphIn{0%{transform:scale(.95) translateY(10px);opacity:0}70%{transform:scale(1.01)}100%{transform:scale(1) translateY(0);opacity:1}}
+@keyframes ripple{0%{transform:translate(-50%,-50%) scale(0);opacity:.55}100%{transform:translate(-50%,-50%) scale(3);opacity:0}}
+@keyframes tabSlide{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:translateX(0)}}
+@keyframes popIn{0%{transform:scale(.82);opacity:0}65%{transform:scale(1.06)}100%{transform:scale(1);opacity:1}}
+@keyframes barRise{from{transform:scaleY(0);transform-origin:bottom}to{transform:scaleY(1)}}
+
+.morph-panel{animation:morphIn .35s cubic-bezier(.34,1.56,.64,1) both}
+.tab-content{animation:tabSlide .28s ease both}
+.pop-card{animation:popIn .38s cubic-bezier(.34,1.56,.64,1) both}
+
+/* Ripple */
+.btn-rpl{position:relative;overflow:hidden}
+.btn-rpl::after{content:'';
+const INIT_BAL=7262;
+
+const SEED_USERS=[
+  {id:'u1',name:'นายกฤชพัฒน จ้อยกล้า',nick:'กัปตัน',pin:'40571'},
+  {id:'u2',name:'นายคุณานนต์ ทองก้อน',nick:'โต๋',pin:'40590'},
+  {id:'u3',name:'นายชัยชนะ เชียงเอม',nick:'วินเนอร์',pin:'40607'},
+  {id:'u4',name:'นายฌาน บุตรราช',nick:'ฌาน',pin:'40612'},
+  {id:'u5',name:'นายณัฏฐชัย เดชาคณิต',nick:'ต้นน้ำ',pin:'40619'},
+  {id:'u6',name:'นายธนกฤต หวานเสนาะ',nick:'โชกุน',pin:'40651'},
+  {id:'u7',name:'นายธีรโชติ จิตจำนงค์',nick:'เต้',pin:'40663'},
+  {id:'u8',name:'นายนิติพัฒน์ ปัณราช',nick:'ตาต้า',pin:'40674'},
+  {id:'u9',name:'นายบุญยกร เจริญล้น',nick:'อุล',pin:'40679'},
+  {id:'u10',name:'นายพีรวิชญ์ ศิริภักดี',nick:'ภีม',pin:'40714'},
+  {id:'u11',name:'นายภีร์ม อนันตพรสกุล',nick:'ภีร์ม',pin:'40727'},
+  {id:'u12',name:'นายภูวิศ บัวทอง',nick:'ตาม',pin:'40741'},
+  {id:'u13',name:'นายวรวรรธน์ วงษ์กล้าหาญ',nick:'กาย',pin:'40760'},
+  {id:'u14',name:'นายวีรวัฒน์ แซ่กัง',nick:'เอ็มเค',pin:'40768'},
+  {id:'u15',name:'นายศิวกร สุขแสง',nick:'ปอโต้',pin:'40777'},
+  {id:'u16',name:'นายอนาคิน สุริยกุล ณ อยุธยา',nick:'เป็นหนึ่ง',pin:'40797'},
+  {id:'u17',name:'นายนพวินท์ เครือฮวบ',nick:'บุ๋น',pin:'43417'},
+  {id:'u18',name:'นายปุญญพัฒน์ ปัญญาโชติ',nick:'ปุญ',pin:'43426'},
+  {id:'u19',name:'นายภูมิภัทร ต่ายทอง',nick:'โอ๊ค',pin:'43443'},
+  {id:'u20',name:'นายอัษฎา โลหะส่องแสง',nick:'เอิร์ท',pin:'43461'},
+  {id:'u21',name:'นางสาวกัลยรัตน์ ช่างแคน',nick:'ข้าวฟ่าง',pin:'40820'},
+  {id:'u22',name:'นางสาวณชารีญา สุวรรณไพบูลย์',nick:'แมงปอ',pin:'40878'},
+  {id:'u23',name:'นางสาวณัฏฐณิชา ศิริผล',nick:'โมสต์',pin:'40891'},
+  {id:'u24',name:'นางสาวปณาลี หมอยาดี',nick:'ปั้นหยา',pin:'40955'},
+  {id:'u25',name:'นางสาวปณิตา สุวรรณวงศ์',nick:'วุ้น',pin:'40957'},
+  {id:'u26',name:'นางสาวปิยพัชญ์ ตรีเนตร',nick:'แก้ม',pin:'40982'},
+  {id:'u27',name:'นางสาวปุณณดา ขันทะเสน',nick:'เนิ้ด',pin:'40984'},
+  {id:'u28',name:'นางสาวภคพร บัวศรี',nick:'แบม',pin:'41022'},
+  {id:'u29',name:'นางสาวภคอร เลิศมงคล',nick:'อิม',pin:'41024'},
+  {id:'u30',name:'นางสาวภัควลัญชญ์ สมัญญาพรเลิศ',nick:'โลมา',pin:'41029'},
+  {id:'u31',name:'นางสาวมีนา ชื่นฤดี',nick:'มีน',pin:'41036'},
+  {id:'u32',name:'นางสาววันพิเศษ นวลไทย',nick:'เอิงเอย',pin:'41058'},
+  {id:'u33',name:'นางสาวกรณ์ภัสสรณ์ พุทธานุรักษ์',nick:'นิชา',pin:'41371'},
+  {id:'u34',name:'นางสาวคณาพร ตันติโกวิทย์',nick:'นานา',pin:'42140'},
+  {id:'u35',name:'นางสาวชุติกาญจน์ เดชโคบุตร',nick:'เอิร์น',pin:'43492'},
+  {id:'u36',name:'นางสาวบุณณดา เดชพันธุ์',nick:'จูน',pin:'43528'},
+  {id:'u37',name:'นางสาวสุนทรา ทองเรือง',nick:'ฟ้าใส',pin:'43592'},
+];
+const SEED_EXP=[
+  {id:'e1',name:'เก็บเงินห้อง เทอม 1/2569 📚',amount:150,desc:'ค่าบำรุงห้องเรียน ภาคเรียนที่ 1',at:Date.now()},
+  {id:'e2',name:'เก็บเงินห้อง เทอม 2/2569 📚',amount:150,desc:'ค่าบำรุงห้องเรียน ภาคเรียนที่ 2',at:Date.now()+864e5},
+  {id:'e3',name:'ค่าประกันอุบัติเหตุ 🛡️',amount:400,desc:'ค่าประกันอุบัติเหตุประจำปีการศึกษา 2569',at:Date.now()},
+  {id:'e4',name:'ค่าเข็มขัดนักเรียน 🎓',amount:60,desc:'ค่าเข็มขัดนักเรียนชาย/หญิง',at:Date.now()},
+];
+
+const {createClient}=supabase;
+const db=createClient(SUPA_URL,SUPA_KEY);
+
+const thb=n=>`฿${Number(n).toLocaleString('th-TH')}`;
+const shortDate=ts=>new Date(ts).toLocaleDateString('th-TH',{day:'numeric',month:'short'});
+const fullDate=ts=>new Date(ts).toLocaleDateString('th-TH',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+function sortUsers(u){return[...u].sort((a,b)=>parseInt(a.id.replace(/\D/g,''))-parseInt(b.id.replace(/\D/g,'')))}
+function hashSlip(s){let h=5381;for(let i=0;i<Math.min(s.length,2000);i++){h=((h<<5)+h)+s.charCodeAt(i);h|=0;}return(h>>>0).toString(36)}
+function calcBoard(users,pays){
+  return users.map(u=>{
+    const ok=pays.filter(p=>p.uid===u.id&&p.status==='verified');
+    const first=ok.length?Math.min(...ok.map(p=>p.paidAt)):Infinity;
+    return{...u,cnt:ok.length,first,score:ok.length*1e13-first};
+  }).sort((a,b)=>b.score-a.score);
+}
+
+let S={
+  users:[],expenses:[],payments:[],
+  qr:QR_IMG,savedBalance:INIT_BAL,
+  session:null,view:'login',
+  adminTab:'ov',userTab:'home',
+  payStep:1,paySelected:[],paySlip:null,payAiResult:null,payAiLoading:false,
+  editMbId:null,lbMode:'speed',lbFilter:'all',
+  slipZoom:null,
+  toast:null,loading:true,
+  loginSearch:'',loginUid:'',loginPin:'',loginErr:'',
+  adminPw:'',adminErr:'',
+};
+
+function ss(upd){S={...S,...upd};render();}
+function lss(k,v){try{localStorage.setItem('cfv2_'+k,JSON.stringify(v))}catch{}}
+function lsg(k,def){try{const v=localStorage.getItem('cfv2_'+k);return v?JSON.parse(v):def}catch{return def}}
+function saveAll(){lss('users',S.users);lss('expenses',S.expenses);lss('payments',S.payments);lss('qr',S.qr);lss('savedBalance',S.savedBalance);}
+
+async function verifySlip(imageData,totalAmount,items){
+  ss({payAiLoading:true,payAiResult:null});
+  try{
+    const mt=imageData.startsWith('data:image/png')?'image/png':'image/jpeg';
+    const b64=imageData.replace(/^data:image\/\w+;base64,/,'');
+    const itemsText=items.map(i=>i.name+' ฿'+i.amount).join(', ');
+    const resp=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:800,
+        messages:[{role:'user',content:[
+          {type:'image',source:{type:'base64',media_type:mt,data:b64}},
+          {type:'text',text:`ตรวจสอบสลิปโอนเงินห้องเรียน\nรายการ: ${itemsText}\nยอดที่ควรโอน: ฿${totalAmount}\nผู้รับ: นายนิติพัฒน์ ปัณราช (PromptPay)\n\nตอบ JSON เท่านั้น ไม่มี markdown:\n{"verdict":"likely_real|suspicious|fake","confidence":0-100,"amount_ok":true|false|null,"recipient_ok":true|false|null,"date_ok":true|false|null,"is_slip":true|false,"issues":[],"note":"คำอธิบายภาษาไทย"}`}
+        ]}]
+      })
+    });
+    const data=await resp.json();
+    const txt=data.content?.filter(b=>b.type==='text').map(b=>b.text).join('')||'{}';
+    const clean=txt.replace(/```json|```/g,'').trim();
+    const result=JSON.parse(clean);
+    ss({payAiResult:result,payAiLoading:false});
+    return result;
+  }catch(e){
+    const result={verdict:'error',confidence:0,is_slip:null,amount_ok:null,recipient_ok:null,date_ok:null,issues:[],note:'ไม่สามารถวิเคราะห์ได้ Admin จะตรวจเอง'};
+    ss({payAiResult:result,payAiLoading:false});
+    return result;
+  }
+}
+
+async function loadData(){
+  const[uR,eR,pR,cR]=await Promise.all([
+    db.from('users').select('*').order('id'),
+    db.from('expenses').select('*').order('at'),
+    db.from('payments').select('*').order('paid_at'),
+    db.from('config').select('*'),
+  ]);
+  if(uR.error||eR.error){return false;}
+  if(!uR.data.length){await db.from('users').insert(SEED_USERS);S.users=SEED_USERS;}
+  else{S.users=uR.data;}
+  if(!eR.data.length){await db.from('expenses').insert(SEED_EXP.map(e=>({id:e.id,name:e.name,amount:e.amount,desc:e.desc,at:e.at})));S.expenses=SEED_EXP;}
+  else{S.expenses=eR.data;}
+  S.payments=(pR.data||[]).map(p=>({...p,paidAt:p.paid_at}));
+  const cfg=cR.data||[];
+  const qrRow=cfg.find(r=>r.key==='qr');
+  const balRow=cfg.find(r=>r.key==='savedBalance');
+  if(qrRow?.value)S.qr=qrRow.value;
+  if(balRow?.value)S.savedBalance=+balRow.value;
+  return true;
+}
+
+function subscribeRealtime(){
+  db.channel('cfv2').on('postgres_changes',{event:'*',schema:'public',table:'payments'},async()=>{
+    const{data}=await db.from('payments').select('*').order('paid_at');
+    S.payments=(data||[]).map(p=>({...p,paidAt:p.paid_at}));render();
+  }).on('postgres_changes',{event:'*',schema:'public',table:'expenses'},async()=>{
+    const{data}=await db.from('expenses').select('*').order('at');
+    S.expenses=data||[];render();
+  }).subscribe();
+}
+
+function showToast(msg,type='info'){
+  S.toast={msg,type};render();
+  setTimeout(()=>{S.toast=null;render();},3000);
+}
+
+function renderStars(){
+  let el=document.getElementById('stars');
+  if(!el){
+    el=document.createElement('div');el.id='stars';
+    el.style.cssText='position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden';
+    document.body.prepend(el);
+    let h='';for(let i=0;i<70;i++){const x=Math.random()*100,y=Math.random()*100,sz=.3+Math.random()*1.6,d=2+Math.random()*3,dl=Math.random()*4;h+=`<div style="position:absolute;left:${x}%;top:${y}%;width:${sz}px;height:${sz}px;border-radius:50%;background:white;opacity:.3;animation:pulse ${d}s ease-in-out ${dl}s infinite"></div>`;}
+    el.innerHTML=h;
+  }
+}
+
+function renderToast(){
+  if(!S.toast)return'';
+  const c={info:'rgba(0,212,255,.92)',success:'rgba(0,200,90,.92)',error:'rgba(255,70,70,.92)',warn:'rgba(255,200,0,.92)'};
+  return`<div style="position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:${c[S.toast.type]||c.info};color:#fff;padding:10px 22px;border-radius:30px;font-size:13px;font-weight:600;z-index:999;animation:fadeUp .3s ease both;box-shadow:0 6px 20px rgba(0,0,0,.4);white-space:nowrap">${S.toast.msg}</div>`;
+}
+
+function aiVerdict(r,compact){
+  if(!r)return'';
+  const cfg={
+    likely_real:{cls:'bai-real',icon:'ti-shield-check',label:'AI: น่าจะจริง'},
+    suspicious:{cls:'bai-sus',icon:'ti-alert-triangle',label:'AI: น่าสงสัย'},
+    fake:{cls:'bai-fake',icon:'ti-shield-x',label:'AI: ผิดปกติ'},
+    error:{cls:'bai-err',icon:'ti-question-mark',label:'AI: ตรวจไม่ได้'},
+  };
+  const c=cfg[r.verdict]||cfg.error;
+  const conf=r.confidence?` ${r.confidence}%`:'';
+  if(compact)return`<span class="${c.cls}"><i class="ti ${c.icon}"></i>${c.label}${conf}</span>`;
+  return`<div class="ai-card ai-${r.verdict==='likely_real'?'real':r.verdict==='suspicious'?'sus':r.verdict==='fake'?'fake':'err'}" style="margin-top:10px">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+      <span class="${c.cls}"><i class="ti ${c.icon}"></i>${c.label}${conf}</span>
+      ${r.amount_ok===true?'<span class="bv" style="font-size:10px">ยอดตรง</span>':''}
+      ${r.amount_ok===false?'<span class="bu" style="font-size:10px">ยอดไม่ตรง</span>':''}
+      ${r.recipient_ok===true?'<span class="bv" style="font-size:10px">ชื่อตรง</span>':''}
+    </div>
+    ${r.note?`<div style="font-size:12px;color:rgba(255,255,255,.6);line-height:1.5">${r.note}</div>`:''}
+    ${r.issues?.length?`<div style="font-size:11px;color:#ff7070;margin-top:5px">${r.issues.map(i=>`⚠ ${i}`).join(' · ')}</div>`:''}
+  </div>`;
+}
+
+// ── LOGIN ──
+function renderLogin(){
+  const isMobile=window.innerWidth<500;
+  return`<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;padding:20px">
+    <div style="width:100%;max-width:420px">
+      <div style="text-align:center;margin-bottom:40px;animation:fadeUp .55s ease both">
+        <div style="font-size:52px;margin-bottom:8px">🏦</div>
+        <h1 class="num" style="font-size:28px;font-weight:900;background:linear-gradient(135deg,#00d4ff,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px">CLASS FUND</h1>
+        <p style="color:rgba(255,255,255,.38);font-size:13px;margin-top:5px">ระบบรวบรวมเงินห้องเรียน v2 · ปีการศึกษา 2569</p>
+        <div style="margin-top:12px;display:inline-flex;align-items:center;gap:10px;background:rgba(0,220,100,.07);border:1px solid rgba(0,220,100,.2);padding:7px 18px;border-radius:24px">
+          <span style="font-size:12px;color:rgba(255,255,255,.4)">ยอดสะสม ปี 2568</span>
+          <span class="num-md" style="color:#00dc64;animation:balancePulse 2.5s ease-in-out infinite">${thb(S.savedBalance)}</span>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;animation:fadeUp .5s ease .1s both">
+        <button class="glass card-ho" data-login="admin" style="padding:18px 22px;border:1px solid rgba(245,200,66,.22);color:#dde5ff;text-align:left;display:flex;align-items:center;gap:14px;border-radius:16px;background:rgba(255,255,255,.04);width:100%;cursor:pointer">
+          <span style="font-size:30px">👑</span>
+          <div><div style="font-weight:600;font-size:16px">Admin</div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:2px">จัดการระบบทั้งหมด</div></div>
+          <span style="margin-left:auto;color:rgba(255,255,255,.3);font-size:17px">›</span>
+        </button>
+        <button class="glass card-ho" data-login="user" style="padding:18px 22px;border:1px solid rgba(0,212,255,.18);color:#dde5ff;text-align:left;display:flex;align-items:center;gap:14px;border-radius:16px;background:rgba(255,255,255,.04);width:100%;cursor:pointer">
+          <span style="font-size:30px">🎓</span>
+          <div><div style="font-weight:600;font-size:16px">นักเรียน</div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:2px">เช็คสถานะ · จ่ายเงิน · ดูอันดับ</div></div>
+          <span style="margin-left:auto;color:rgba(255,255,255,.3);font-size:17px">›</span>
+        </button>
+      </div>
+      <div id="lf"></div>
+    </div>
+  </div>`;
+}
+
+function showAdminForm(){
+  document.getElementById('lf').innerHTML=`
+    <div class="glass" style="padding:24px;margin-top:14px;animation:fadeUp .3s ease both">
+      <h2 style="font-size:16px;font-weight:600;margin-bottom:18px">👑 เข้าระบบ Admin</h2>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <input type="password" id="apw" placeholder="รหัสผ่าน Admin"/>
+        <div id="aerr" style="color:#ff5050;font-size:12px;display:none"></div>
+        <button class="btn-p" style="width:100%" onclick="doAdminLogin()">เข้าสู่ระบบ</button>
+        <button class="btn-g" style="width:100%" onclick="document.getElementById('lf').innerHTML=''">← ย้อนกลับ</button>
+      </div>
+    </div>`;
+  setTimeout(()=>document.getElementById('apw')?.focus(),50);
+}
+
+function showUserForm(){
+  const users=sortUsers(S.users);
+  document.getElementById('lf').innerHTML=`
+    <div class="glass" style="padding:24px;margin-top:14px;animation:fadeUp .3s ease both">
+      <h2 style="font-size:16px;font-weight:600;margin-bottom:16px">🎓 เลือกชื่อของคุณ</h2>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="position:relative">
+          <input id="usearch" placeholder="พิมพ์ชื่อหรือชื่อเล่นเพื่อค้นหา..." oninput="filterUsers(this.value)" autocomplete="off"/>
+          <i class="ti ti-search" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.3);font-size:15px"></i>
+        </div>
+        <div id="ulist" style="max-height:220px;overflow-y:auto;display:flex;flex-direction:column;gap:5px">${renderUserList(users,'')}</div>
+        <input type="password" id="upin" placeholder="รหัสนักเรียน (PIN)" maxlength="6"/>
+        <div id="uerr" style="color:#ff5050;font-size:12px;display:none"></div>
+        <button class="btn-p" style="width:100%" onclick="doUserLogin()">เข้าสู่ระบบ</button>
+        <button class="btn-g" style="width:100%" onclick="document.getElementById('lf').innerHTML=''">← ย้อนกลับ</button>
+      </div>
+      ${lsg('lastUser',null)?`<div style="margin-top:10px;padding:8px 12px;background:rgba(0,212,255,.07);border:1px solid rgba(0,212,255,.15);border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:space-between" onclick="quickLogin()">
+        <div><div style="font-size:12px;color:rgba(255,255,255,.5)">เข้าล่าสุด</div><div style="font-size:13px;font-weight:500">${S.users.find(u=>u.id===lsg('lastUser',null)?.uid)?.name||'?'}</div></div>
+        <span style="font-size:12px;color:#00d4ff">เข้าเลย ›</span>
+      </div>`:''}
+    </div>`;
+  setTimeout(()=>document.getElementById('usearch')?.focus(),50);
+}
+
+function renderUserList(users,q){
+  const filtered=q?users.filter(u=>u.name.includes(q)||u.nick?.includes(q)||u.pin?.includes(q)):users;
+  if(!filtered.length)return`<div style="text-align:center;padding:16px;color:rgba(255,255,255,.3);font-size:13px">ไม่พบชื่อที่ค้นหา</div>`;
+  return filtered.map(u=>`<div onclick="selectUser('${u.id}')" style="padding:9px 12px;border-radius:9px;cursor:pointer;border:1px solid ${S.loginUid===u.id?'#00d4ff':'rgba(255,255,255,.08)'};background:${S.loginUid===u.id?'rgba(0,212,255,.1)':'rgba(255,255,255,.03)'};display:flex;align-items:center;gap:10px;transition:all .15s" onmouseover="this.style.borderColor='rgba(0,212,255,.4)'" onmouseout="this.style.borderColor='${S.loginUid===u.id?'#00d4ff':'rgba(255,255,255,.08)'}'">
+    <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,rgba(0,212,255,.2),rgba(167,139,250,.2));display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0">${u.name[1]||u.name[0]}</div>
+    <div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${u.name}</div><div style="font-size:10px;color:rgba(255,255,255,.35)">${u.nick?`(${u.nick}) · `:''} ${u.pin}</div></div>
+  </div>`).join('');
+}
+
+function filterUsers(q){
+  S.loginSearch=q;S.loginUid='';
+  const el=document.getElementById('ulist');
+  if(el)el.innerHTML=renderUserList(sortUsers(S.users),q);
+}
+
+function selectUser(uid){
+  S.loginUid=uid;
+  document.querySelectorAll('#ulist > div').forEach(el=>{
+    const isSelected=el.getAttribute('onclick')?.includes(`'${uid}'`);
+    el.style.borderColor=isSelected?'#00d4ff':'rgba(255,255,255,.08)';
+    el.style.background=isSelected?'rgba(0,212,255,.1)':'rgba(255,255,255,.03)';
+  });
+  document.getElementById('upin')?.focus();
+}
+
+function doAdminLogin(){
+  const pw=document.getElementById('apw')?.value||'';
+  if(pw===ADMIN_PASS){ss({session:{role:'admin'},view:'admin',adminTab:'ov'});}
+  else{const e=document.getElementById('aerr');if(e){e.textContent='รหัสผ่านไม่ถูกต้อง';e.style.display='block';}}
+}
+
+function doUserLogin(){
+  const uid=S.loginUid;
+  const pin=document.getElementById('upin')?.value||'';
+  const u=S.users.find(x=>x.id===uid);
+  const e=document.getElementById('uerr');
+  if(!u){if(e){e.textContent='กรุณาเลือกชื่อ';e.style.display='block';}return;}
+  if(u.pin&&u.pin!==pin){if(e){e.textContent='รหัสนักเรียนไม่ถูกต้อง';e.style.display='block';}return;}
+  lss('lastUser',{uid,pin});
+  ss({session:{role:'user',uid},view:'user',userTab:'home',loginUid:'',loginSearch:'',loginPin:'',loginErr:''});
+}
+
+function quickLogin(){
+  const last=lsg('lastUser',null);
+  if(!last)return;
+  ss({session:{role:'user',uid:last.uid},view:'user',userTab:'home'});
+}
+
+// ── USER FRAME ──
+function renderUser(){
+  const uid=S.session.uid;
+  const user=S.users.find(u=>u.id===uid);
+  const mine=S.payments.filter(p=>p.uid===uid);
+  const ok=mine.filter(p=>p.status==='verified').length;
+  const pend=mine.filter(p=>p.status==='pending').length;
+  const board=calcBoard(S.users,S.payments);
+  const rank=board.findIndex(b=>b.id===uid)+1;
+  const MEDALS=['🥇','🥈','🥉'];
+  const tab=S.userTab;
+
+  let body='';
+  if(tab==='home')body=renderUserHome(uid,mine,user);
+  else if(tab==='pay')body=renderUserPay(uid,mine);
+  else if(tab==='chart')body=renderUserChart();
+  else if(tab==='lb')body=renderUserLB();
+
+  const pendBadge=pend>0?`<div style="position:absolute;top:-4px;right:-4px;background:#ff4444;color:white;border-radius:50%;width:16px;height:16px;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center">${pend}</div>`:'';
+
+  return`<div style="min-height:100vh;display:flex;flex-direction:column;position:relative;z-index:1">
+    <div style="padding:10px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.06);background:rgba(0,0,0,.25);backdrop-filter:blur(10px);position:sticky;top:0;z-index:10">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#00d4ff,#a78bfa);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0">${user?.name[1]||user?.name[0]}</div>
+        <div><div style="font-weight:600;font-size:13px">${user?.name} ${user?.nick?`<span style="color:rgba(255,255,255,.38);font-size:11px">(${user.nick})</span>`:''}</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.35)">จ่ายแล้ว ${ok}/${S.expenses.length} ${rank>0&&rank<=3?MEDALS[rank-1]+' #'+rank:rank>0?'· #'+rank+' ของห้อง':''}</div></div>
+      </div>
+      <button class="btn-g" onclick="ss({session:null,view:'login'})" style="padding:5px 10px;font-size:11px;color:#ff6666;border-color:rgba(255,80,80,.18)">ออก</button>
+    </div>
+    <div style="flex:1;overflow-y:auto">${body}</div>
+    <div class="bnav" style="position:sticky;bottom:0;z-index:10">
+      <button class="bni${tab==='home'?' on':''}" onclick="ss({userTab:'home'})"><i class="ti ti-home"></i>หน้าแรก</button>
+      <button class="bni${tab==='pay'?' on':''}" onclick="ss({userTab:'pay',payStep:1,paySelected:[],paySlip:null,payAiResult:null,payAiLoading:false})" style="position:relative">${pendBadge}<i class="ti ti-credit-card"></i>จ่ายเงิน</button>
+      <button class="bni${tab==='chart'?' on':''}" onclick="ss({userTab:'chart'})"><i class="ti ti-chart-bar"></i>กราฟ</button>
+      <button class="bni${tab==='lb'?' on':''}" onclick="ss({userTab:'lb'})"><i class="ti ti-trophy"></i>อันดับ</button>
+    </div>
+  </div>`;
+}
+
+function renderUserHome(uid,mine,user){
+  const ok=mine.filter(p=>p.status==='verified');
+  const pend=mine.filter(p=>p.status==='pending');
+  const unpaid=S.expenses.filter(e=>!mine.find(p=>p.eid===e.id));
+  const got=S.payments.filter(p=>p.status==='verified').reduce((s,p)=>{const e=S.expenses.find(x=>x.id===p.eid);return s+(e?.amount||0)},0);
+  const total=S.users.length*S.expenses.reduce((s,e)=>s+e.amount,0);
+  const pct=total?Math.min(100,(got/total)*100):0;
+  const board=calcBoard(S.users,S.payments);
+  const rank=board.findIndex(b=>b.id===uid)+1;
+  const top3=board.slice(0,3);
+  return`<div style="padding:16px;max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:14px">
+    <div class="glass" style="padding:20px">
+      <div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:4px">ยอดรวมห้อง</div>
+      <div class="num-lg" style="color:#00dc64;animation:balancePulse 3s ease-in-out infinite">${thb(S.savedBalance+got)}</div>
+      <div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:4px">ปี 2568: ${thb(S.savedBalance)} + เก็บได้: ${thb(got)}</div>
+      <div class="pbar" style="margin-top:12px"><div class="pbar-fill" style="width:${pct.toFixed(1)}%;background:linear-gradient(90deg,#00d4ff,#00dc64)"></div></div>
+      <div style="font-size:10px;color:rgba(255,255,255,.28);margin-top:4px">${pct.toFixed(0)}% ของเป้า ปี 2569 (${thb(total)})</div>
+    </div>
+    ${unpaid.length?`<div class="glass" style="padding:16px;border:1px solid rgba(255,200,0,.18)">
+      <div style="font-size:12px;font-weight:600;color:#ffc800;margin-bottom:10px">⚠️ ค้างจ่าย ${unpaid.length} รายการ</div>
+      ${unpaid.map(e=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05)">
+        <span style="font-size:13px">${e.name}</span>
+        <span class="num-sm" style="color:#00d4ff">${thb(e.amount)}</span>
+      </div>`).join('')}
+      <button class="btn-p" style="width:100%;margin-top:12px" onclick="ss({userTab:'pay',payStep:1,paySelected:${JSON.stringify(unpaid.map(e=>e.id))},paySlip:null,payAiResult:null,payAiLoading:false})">จ่ายทั้งหมด (${thb(unpaid.reduce((s,e)=>s+e.amount,0))})</button>
+    </div>`:`<div class="glass" style="padding:20px;text-align:center"><div style="font-size:36px;margin-bottom:8px">🎉</div><div style="font-size:15px;font-weight:600">จ่ายครบทุกรายการแล้ว!</div></div>`}
+    ${pend.length?`<div class="glass" style="padding:14px;border:1px solid rgba(255,200,0,.15)">
+      <div style="font-size:12px;font-weight:600;color:#ffc800;margin-bottom:8px">⏳ รอ Admin ตรวจสอบ ${pend.length} รายการ</div>
+      ${pend.map(p=>{const e=S.expenses.find(x=>x.id===p.eid);return`<div style="font-size:12px;color:rgba(255,255,255,.5);padding:3px 0">${e?.name} · ${fullDate(p.paidAt)}</div>`;}).join('')}
+    </div>`:''}
+    <div class="glass" style="padding:16px">
+      <div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:10px">TOP 3 ห้อง</div>
+      ${top3.map((u,i)=>{const MEDALS=['🥇','🥈','🥉'];return`<div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05)">
+        <span style="font-size:18px">${MEDALS[i]}</span>
+        <div style="flex:1;font-size:13px${u.id===uid?';font-weight:600;color:#00d4ff':''}">${u.name} ${u.nick?`(${u.nick})`:''}</div>
+        <span class="num" style="font-size:13px;color:${u.id===uid?'#00d4ff':'rgba(255,255,255,.5)'}">${u.cnt}/${S.expenses.length}</span>
+      </div>`;}).join('')}
+      ${rank>3?`<div style="text-align:center;font-size:12px;color:rgba(255,255,255,.35);margin-top:8px">อันดับของคุณ: <span class="num" style="color:#00d4ff">#${rank}</span></div>`:''}
+    </div>
+  </div>`;
+}
+
+function renderUserPay(uid,mine){
+  const step=S.payStep||1;
+  if(step===1)return renderPaySelect(uid,mine);
+  if(step===2)return renderPayQR(uid,mine);
+  return renderPayDone();
+}
+
+function renderPaySelect(uid,mine){
+  const sel=S.paySelected||[];
+  const totalAmt=sel.reduce((s,id)=>{const e=S.expenses.find(x=>x.id===id);return s+(e?.amount||0)},0);
+  return`<div style="padding:16px;max-width:640px;margin:0 auto">
+    <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:14px">เลือกรายการที่ต้องการจ่าย (เลือกได้หลายรายการ)</div>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
+      ${S.expenses.map(e=>{
+        const p=mine.find(x=>x.eid===e.id);
+        const isPaid=!!p;
+        const isSel=sel.includes(e.id);
+        const status=p?.status==='verified'?'<span class="bv">จ่ายแล้ว</span>':p?.status==='pending'?'<span class="bp">รอตรวจ</span>':'';
+        return`<div class="exp-sel${isSel?' on':''}${isPaid?' paid':''}" onclick="${isPaid?'':'togglePay(\"'+e.id+'\")'}">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div class="chk${isSel?' on':''}">
+              ${isSel?'<i class="ti ti-check" style="font-size:11px;color:#00d4ff"></i>':isPaid?'<i class="ti ti-check" style="font-size:11px;color:rgba(0,220,100,.7)"></i>':''}
+            </div>
+            <div style="flex:1">
+              <div style="font-size:14px;font-weight:500">${e.name}</div>
+              ${e.desc?`<div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:2px">${e.desc}</div>`:''}
+            </div>
+            <div style="text-align:right">
+              <div class="num-sm" style="color:${isSel?'#00d4ff':'#dde5ff'}">${thb(e.amount)}</div>
+              ${status?`<div style="margin-top:4px">${status}</div>`:''}
+            </div>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>
+    <div class="glass" style="padding:14px;position:sticky;bottom:70px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div style="font-size:13px;color:rgba(255,255,255,.5)">เลือก <span class="num" style="color:white;font-weight:600">${sel.length}</span> รายการ</div>
+        <div class="num-md" style="color:#00d4ff">${thb(totalAmt)}</div>
+      </div>
+      <button class="btn-p" style="width:100%" ${sel.length===0?'disabled':''} onclick="goToQR()">
+        <i class="ti ti-arrow-right" style="font-size:15px;margin-right:6px"></i>ต่อไป — ดู QR
+      </button>
+    </div>
+  </div>`;
+}
+
+function renderPayQR(uid,mine){
+  const sel=S.paySelected||[];
+  const items=sel.map(id=>S.expenses.find(e=>e.id===id)).filter(Boolean);
+  const total=items.reduce((s,e)=>s+e.amount,0);
+  const slip=S.paySlip;
+  const ai=S.payAiResult;
+  const aiLoading=S.payAiLoading;
+  const canSubmit=!!slip&&!aiLoading&&ai?.verdict!=='fake';
+  const hash=slip?hashSlip(slip):'';
+  const dupePay=hash?S.payments.find(p=>p.slip_hash===hash&&p.uid!==uid):null;
+  return`<div style="padding:16px;max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:12px">
+    <button class="btn-g" style="align-self:flex-start;padding:6px 12px;font-size:12px" onclick="ss({payStep:1})">← แก้ไขรายการ</button>
+    <div class="glass" style="padding:16px">
+      <div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:8px">สรุปรายการ</div>
+      ${items.map(e=>`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:13px">
+        <span>${e.name}</span><span class="num">${thb(e.amount)}</span>
+      </div>`).join('')}
+      <div style="display:flex;justify-content:space-between;padding:10px 0 0;font-size:15px;font-weight:600">
+        <span>รวม</span><span class="num-sm" style="color:#00d4ff">${thb(total)}</span>
+      </div>
+    </div>
+    <div class="glass" style="padding:18px;text-align:center">
+      <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:10px">สแกน QR PromptPay</div>
+      <div class="num-md" style="color:#f5c842;margin-bottom:14px">${thb(total)}</div>
+      ${S.qr?`<div style="display:inline-block;padding:12px;background:white;border-radius:16px;box-shadow:0 0 30px rgba(0,212,255,.3)">
+        <img src="${S.qr}" style="max-width:180px;max-height:180px;display:block;border-radius:8px"/>
+      </div>
+      <div style="margin-top:10px;font-size:11px;color:rgba(255,255,255,.38)">นายนิติพัฒน์ ปัณราช · PromptPay</div>`:
+      `<div style="width:180px;height:180px;margin:0 auto;background:rgba(255,255,255,.04);border-radius:12px;border:2px dashed rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px"><i class="ti ti-qrcode" style="font-size:38px;color:rgba(255,255,255,.3)"></i><div style="font-size:11px;color:rgba(255,255,255,.3)">ยังไม่ตั้งค่า QR</div></div>`}
+    </div>
+    <div class="glass" style="padding:18px;border:1px solid ${slip?(canSubmit?'rgba(0,220,100,.25)':ai?.verdict==='fake'?'rgba(255,60,60,.35)':'rgba(255,200,0,.25)'):'rgba(255,200,0,.2)'}">
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
+        <span style="font-size:14px;font-weight:600">📎 แนบสลิปโอนเงิน</span>
+        <span style="background:rgba(255,60,60,.15);color:#ff5050;border:1px solid rgba(255,60,60,.3);padding:1px 8px;border-radius:10px;font-size:10px;font-weight:600">บังคับ</span>
+      </div>
+      <div style="font-size:11px;color:rgba(255,255,255,.38);margin-bottom:12px;line-height:1.6">ต้องแนบสลิป · AI จะตรวจสอบอัตโนมัติ · ยอดจะเพิ่มหลัง Admin ยืนยัน</div>
+      ${dupePay?`<div style="background:rgba(255,60,60,.1);border:1px solid rgba(255,60,60,.25);border-radius:8px;padding:10px;font-size:12px;color:#ff7070;margin-bottom:10px">⚠️ สลิปนี้ถูกใช้ไปแล้ว กรุณาใช้สลิปใหม่</div>`:''}
+      ${slip?`<div style="text-align:center;margin-bottom:12px">
+        <div style="position:relative;display:inline-block">
+          <img src="${slip}" style="max-width:100%;max-height:180px;border-radius:10px;object-fit:contain;border:2px solid ${canSubmit?'rgba(0,220,100,.5)':ai?.verdict==='fake'?'rgba(255,60,60,.5)':'rgba(255,200,0,.4)'}"/>
+          ${ai&&!aiLoading?`<div style="position:absolute;top:6px;right:6px;background:${ai.verdict==='likely_real'?'rgba(0,220,100,.9)':ai.verdict==='fake'?'rgba(255,60,60,.9)':'rgba(255,200,0,.9)'};border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:13px">${ai.verdict==='likely_real'?'✓':ai.verdict==='fake'?'✗':'!'}</div>`:''}
+        </div>
+        <div style="margin-top:8px"><button class="btn-g" onclick="clearSlip()" style="font-size:11px;padding:5px 12px">เปลี่ยนสลิป</button></div>
+      </div>`:`<div class="slip-zone" onclick="document.getElementById('slip-inp').click()">
+        <i class="ti ti-camera" style="font-size:28px;color:rgba(255,255,255,.4);display:block;margin-bottom:8px"></i>
+        <div style="font-size:13px;font-weight:500">แตะเพื่อถ่ายภาพหรือเลือกสลิป</div>
+        <div style="font-size:10px;color:rgba(255,200,0,.65);margin-top:5px">⚠️ จำเป็นต้องแนบสลิปก่อนส่ง</div>
+      </div>`}
+      ${aiLoading?`<div class="ai-card ai-loading" style="display:flex;align-items:center;gap:10px">
+        <i class="ti ti-loader" style="font-size:18px;color:#00d4ff;animation:aiSpin 1s linear infinite"></i>
+        <span style="font-size:13px;color:rgba(255,255,255,.6)">AI กำลังตรวจสอบสลิป...</span>
+      </div>`:''}
+      ${ai&&!aiLoading?aiVerdict(ai,false):''}
+      <input id="slip-inp" type="file" accept="image/*" capture="environment" onchange="onSlipUpload(this)" style="display:none"/>
+      <button class="btn-p" style="width:100%;margin-top:12px" ${canSubmit?'':(slip&&!aiLoading?'disabled':'')} onclick="${canSubmit?`submitPay('${uid}',${JSON.stringify(sel)})`:''}" >
+        ${aiLoading?'<i class="ti ti-loader" style="animation:aiSpin 1s linear infinite;margin-right:6px"></i> AI กำลังตรวจ...'
+         :slip&&ai?.verdict==='fake'?'🚫 ไม่สามารถส่งได้ — AI ตรวจพบปัญหา'
+         :slip&&!ai?'<i class="ti ti-loader" style="animation:aiSpin 1s linear infinite;margin-right:6px"></i> กำลังตรวจสอบ...'
+         :slip?'💸 ส่งการชำระเงิน'
+         :'🔒 กรุณาแนบสลิปก่อน'}
+      </button>
+    </div>
+  </div>`;
+}
+
+function renderPayDone(){
+  const sel=S.paySelected||[];
+  const items=sel.map(id=>S.expenses.find(e=>e.id===id)).filter(Boolean);
+  const total=items.reduce((s,e)=>s+e.amount,0);
+  return`<div style="padding:40px 20px;max-width:480px;margin:0 auto">
+    <div class="glass" style="padding:40px;text-align:center;animation:fadeUp .4s ease both">
+      <div style="font-size:52px;margin-bottom:14px;animation:aiPop .5s ease both">✅</div>
+      <div style="font-size:18px;font-weight:600;margin-bottom:8px">ส่งการชำระเงินแล้ว!</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.42);line-height:1.7;margin-bottom:20px">รอ Admin ตรวจสอบและยืนยัน<br>ยอดเงินจะอัปเดตอัตโนมัติ</div>
+      <div class="glass" style="padding:14px;text-align:left;margin-bottom:16px">
+        ${items.map(e=>`<div style="display:flex;justify-content:space-between;padding:5px 0;font-size:12px;border-bottom:1px solid rgba(255,255,255,.06)"><span>${e.name}</span><span class="num">${thb(e.amount)}</span></div>`).join('')}
+        <div style="display:flex;justify-content:space-between;padding:8px 0 0;font-size:14px;font-weight:600"><span>รวม</span><span class="num" style="color:#00d4ff">${thb(total)}</span></div>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:center">
+        <button class="btn-p" onclick="ss({userTab:'pay',payStep:1,paySelected:[],paySlip:null,payAiResult:null,payAiLoading:false})">จ่ายรายการอื่น</button>
+        <button class="btn-g" onclick="ss({userTab:'home'})">กลับหน้าแรก</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderUserChart(){
+  const{expenses,payments,users,savedBalance}=S;
+  const verified=payments.filter(p=>p.status==='verified');
+  const got=verified.reduce((s,p)=>{const e=expenses.find(x=>x.id===p.eid);return s+(e?.amount||0)},0);
+  const target=users.length*expenses.reduce((s,e)=>s+e.amount,0)||1;
+  const grandTotal=savedBalance+got;
+  const pct=Math.min(100,(got/target)*100);
+  const sorted=[...verified].sort((a,b)=>a.paidAt-b.paidAt);
+  let running=0;
+  const pts=sorted.map(p=>{const e=expenses.find(x=>x.id===p.eid);running+=(e?.amount||0);return{ts:p.paidAt,amt:running};});
+  const W=320,H=160,PL=50,PB=30,PT=12,PR=12,cW=W-PL-PR,cH=H-PT-PB;
+  const maxV=Math.max(target,got,1);
+  const barW=pts.length?Math.max(8,Math.min(30,Math.floor(cW/Math.max(pts.length,1)*.6))):20;
+  const gap=pts.length>1?(cW-barW*pts.length)/(pts.length-1):0;
+  const barsH=pts.map((p,i)=>{const bH=Math.round((p.amt/maxV)*cH);const x=PL+i*(barW+gap);const y=PT+cH-bH;return`<rect x="${x}" y="${y}" width="${barW}" height="${bH}" rx="3" fill="${i===pts.length-1?'rgba(0,212,255,.9)':'rgba(0,212,255,.45)'}"/>`;}).join('');
+  const targetY=PT+cH-Math.round((target/maxV)*cH);
+  const yLabels=[0,.5,1].map(f=>{const val=Math.round(maxV*f);const y=PT+cH-Math.round(f*cH);return`<text x="${PL-4}" y="${y+4}" text-anchor="end" font-size="9" fill="rgba(255,255,255,.3)">${val>=1000?(val/1000).toFixed(1)+'K':val}</text>`;}).join('');
+  const svg=`<svg width="100%" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
+    ${yLabels}
+    ${barsH}
+    <line x1="${PL}" y1="${targetY}" x2="${W-PR}" y2="${targetY}" stroke="rgba(255,200,0,.5)" stroke-width="1" stroke-dasharray="4 3"/>
+    <text x="${W-PR+2}" y="${targetY+3}" font-size="8" fill="rgba(255,200,0,.55)">เป้า</text>
+    <line x1="${PL}" y1="${PT}" x2="${PL}" y2="${PT+cH}" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+    <line x1="${PL}" y1="${PT+cH}" x2="${W-PR}" y2="${PT+cH}" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+    ${!pts.length?`<text x="${W/2}" y="${H/2}" text-anchor="middle" font-size="11" fill="rgba(255,255,255,.25)">ยังไม่มีการยืนยัน</text>`:''}
+  </svg>`;
+  const expBars=expenses.map(e=>{
+    const paid=payments.filter(p=>p.eid===e.id&&p.status==='verified').length;
+    const pend=payments.filter(p=>p.eid===e.id&&p.status==='pending').length;
+    const pp=Math.min(100,(paid/users.length)*100);
+    const pendP=Math.min(100-pp,(pend/users.length)*100);
+    const short=e.name.replace(/📚|🛡️|🎓/g,'').trim();
+    return`<div style="margin-bottom:14px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+        <span style="font-size:13px;font-weight:500">${short}</span>
+        <span class="num" style="font-size:12px;color:#00dc64">${thb(paid*e.amount)} <span style="color:rgba(255,255,255,.3);font-size:10px">${paid}/${users.length}</span></span>
+      </div>
+      <div class="pbar"><div class="pbar-fill" style="width:${pp.toFixed(1)}%;background:linear-gradient(90deg,#00b894,#00dc64);float:left"></div><div style="height:8px;width:${pendP.toFixed(1)}%;background:rgba(255,200,0,.5);float:left;border-radius:0 4px 4px 0"></div></div>
+      ${pend>0?`<div style="font-size:10px;color:rgba(255,200,0,.6);margin-top:3px">⏳ รอตรวจสอบ ${pend} คน</div>`:''}
+    </div>`;
+  }).join('');
+  return`<div style="padding:16px;max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:12px">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+      ${[{l:'ยกมา ปี 68',v:thb(savedBalance),c:'#f5c842'},{l:'เก็บได้ ปี 69',v:thb(got),c:'#00dc64'},{l:'รวมทั้งหมด',v:thb(grandTotal),c:'#00d4ff'}].map(s=>`<div class="glass" style="padding:13px;text-align:center"><div class="num" style="font-size:16px;font-weight:700;color:${s.c}">${s.v}</div><div style="font-size:10px;color:rgba(255,255,255,.38);margin-top:3px">${s.l}</div></div>`).join('')}
+    </div>
+    <div class="glass" style="padding:16px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:12px">
+        <div style="font-size:13px;font-weight:600">📈 กราฟยอดสะสม ปี 2569</div>
+        <span class="num" style="font-size:12px;color:#00dc64">${pct.toFixed(0)}%</span>
+      </div>
+      ${svg}
+    </div>
+    <div class="glass" style="padding:16px">
+      <div style="font-size:13px;font-weight:600;margin-bottom:14px">แยกตามรายการ</div>
+      ${expBars}
+      <div style="display:flex;gap:12px;padding-top:8px;border-top:1px solid rgba(255,255,255,.07)">
+        <span style="font-size:10px;color:rgba(0,220,100,.65)">● ยืนยันแล้ว</span>
+        <span style="font-size:10px;color:rgba(255,200,0,.65)">● รอตรวจ</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderUserLB(){
+  const board=calcBoard(S.users,S.payments);
+  const mode=S.lbMode||'speed';
+  const total=S.expenses.length;
+  const uid=S.session?.uid;
+  const MEDAL=['🥇','🥈','🥉'];
+  const RING=[
+    {border:'rgba(245,200,66,.6)',bg:'rgba(245,200,66,.08)',col:'#f5c842',cls:'r1',h:160,extra:'<span style="font-size:18px;animation:crown 1.5s ease-in-out infinite;display:inline-block">👑</span>'},
+    {border:'rgba(192,192,192,.5)',bg:'rgba(192,192,192,.06)',col:'#d0d0d0',cls:'r2',h:128},
+    {border:'rgba(205,127,50,.5)',bg:'rgba(205,127,50,.06)',col:'#cd9a52',cls:'r3',h:104},
+  ];
+  let sorted=[...board];
+  if(mode==='complete')sorted=[...board].sort((a,b)=>b.cnt-a.cnt||(a.first-b.first));
+  else if(mode==='unpaid')sorted=[...board].sort((a,b)=>a.cnt-b.cnt);
+  const ORDER=[1,0,2];
+  const podium=ORDER.map((idx,col)=>{
+    const u=sorted[idx];if(!u)return`<div style="flex:1;max-width:${col===1?175:150}px"></div>`;
+    const r=RING[idx]||RING[2];
+    const pts=idx===0?Array.from({length:14},(_,i)=>{const a=(i/14)*2*Math.PI,d=42+Math.random()*16;return`<div style="position:absolute;width:4px;height:4px;border-radius:50%;background:hsl(${40+i*5},100%,65%);top:50%;left:50%;margin:-2px;--tx:${(Math.cos(a)*d).toFixed(1)}px;--ty:${(Math.sin(a)*d).toFixed(1)}px;animation:particle 2.2s ease-out ${((i/14)*2.2).toFixed(2)}s infinite"></div>`}).join(''):'';
+    return`<div style="flex:1;max-width:${col===1?175:150}px;animation:fadeUp .5s ease ${col*.12}s both">
+      <div class="${r.cls}" style="background:${r.bg};border:1px solid ${r.border};border-radius:16px;padding:${col===1?'18px 12px':'12px 8px'};text-align:center;position:relative;overflow:hidden;min-height:${r.h}px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:${col===1?4:3}px">
+        <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none">${pts}</div>
+        <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:${col===1?4:3}px">
+          ${r.extra||''}
+          <span style="font-size:${col===1?26:18}px">${MEDAL[idx]}</span>
+          <span class="num-rank" style="font-size:${col===1?30:20}px;color:${r.col}">#${idx+1}</span>
+          <span style="font-size:${col===1?13:10}px;font-weight:600;color:${r.col};text-align:center;line-height:1.3${u.id===uid?';text-decoration:underline':''}">${u.name}</span>
+          ${u.nick?`<span style="font-size:9px;color:${r.col};opacity:.7">(${u.nick})</span>`:''}
+          <div><span class="num-rank" style="font-size:${col===1?18:14}px;color:#00dc64">${u.cnt}</span><span style="font-size:10px;color:rgba(255,255,255,.35)">/${total}</span></div>
+          ${u.cnt>0&&mode==='speed'?`<span style="font-size:9px;color:rgba(255,255,255,.3)">${shortDate(u.first)}</span>`:''}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  const rank=sorted.findIndex(b=>b.id===uid)+1;
+  const rest=sorted.length>3?sorted.slice(3).map((u,i)=>`<div class="glass" style="padding:11px 15px;display:flex;align-items:center;gap:12px;animation:slideIn .3s ease ${i*.04}s both">
+    <div class="num-rank" style="font-size:14px;color:rgba(255,255,255,.28);width:28px;text-align:center">#${i+4}</div>
+    <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600${u.id===uid?';color:#00d4ff':''}">${u.name[1]||u.name[0]}</div>
+    <div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:${u.id===uid?'600':'400'};color:${u.id===uid?'#00d4ff':'inherit'}">${u.name} ${u.nick?`<span style="font-size:10px;opacity:.5">(${u.nick})</span>`:''}</div>
+    <div style="font-size:10px;color:rgba(255,255,255,.32);margin-top:1px">${u.cnt>0?`${u.cnt}/${total} รายการ${mode==='speed'?` · ${shortDate(u.first)}`:''}`:mode==='unpaid'?'ค้างจ่ายทุกรายการ':'ยังไม่จ่ายเลย'}</div></div>
+    <div class="num-rank" style="font-size:17px;color:${u.cnt>0?'#00dc64':'rgba(255,255,255,.2)'}">${u.cnt}</div>
+  </div>`).join(''):'';
+  const confetti=Array.from({length:22},(_,i)=>{const x=Math.random()*100,h=Math.random()*360,sz=4+Math.random()*5,dur=2.5+Math.random()*2.5,dl=Math.random()*1.5;return`<div style="position:fixed;left:${x.toFixed(1)}%;top:-20px;width:${sz.toFixed(0)}px;height:${sz.toFixed(0)}px;border-radius:${Math.random()>.5?'50%':'2px'};background:hsl(${h.toFixed(0)},90%,65%);animation:confetti ${dur.toFixed(1)}s ease ${dl.toFixed(1)}s both;pointer-events:none;z-index:5"></div>`}).join('');
+  return`${confetti}<div style="padding:14px;max-width:680px;margin:0 auto">
+    <div style="display:flex;gap:4px;margin-bottom:14px">
+      ${[{m:'speed',l:'จ่ายไว'},{m:'complete',l:'ครบมากสุด'},{m:'unpaid',l:'ยังไม่จ่าย'}].map(t=>`<button class="tab${mode===t.m?' on':''}" onclick="ss({lbMode:'${t.m}'})" style="flex:1;text-align:center">${t.l}</button>`).join('')}
+    </div>
+    <div style="display:flex;align-items:flex-end;justify-content:center;gap:8px;margin-bottom:20px">${podium}</div>
+    ${rest?`<div style="font-size:11px;color:rgba(255,255,255,.25);text-align:center;margin-bottom:10px;letter-spacing:1px">— อันดับที่เหลือ —</div><div style="display:flex;flex-direction:column;gap:7px">${rest}</div>`:''}
+    ${rank>3?`<div class="glass" style="padding:12px 16px;margin-top:12px;display:flex;align-items:center;justify-content:space-between;border:1px solid rgba(0,212,255,.2)">
+      <div style="font-size:13px">อันดับของคุณ</div>
+      <div class="num-rank" style="font-size:24px;color:#00d4ff">#${rank}</div>
+    </div>`:''}
+  </div>`;
+}
+
+// ── ADMIN ──
+function renderAdmin(){
+  const pend=S.payments.filter(p=>p.status==='pending').length;
+  const tab=S.adminTab||'ov';
+  const tabs=[{id:'ov',l:'📊 ภาพรวม'},{id:'ex',l:'💰 รายการ'},{id:'mb',l:'👥 สมาชิก'},{id:'vr',l:`✅ สลิป${pend>0?` (${pend})`:''}`},{id:'qr',l:'📱 QR'},{id:'bl',l:'💵 ยอดเงิน'}];
+  let body='';
+  if(tab==='ov')body=renderAdminOv();
+  else if(tab==='ex')body=renderAdminEx();
+  else if(tab==='mb')body=renderAdminMb();
+  else if(tab==='vr')body=renderAdminVr();
+  else if(tab==='qr')body=renderAdminQR();
+  else if(tab==='bl')body=renderAdminBal();
+  return`<div style="min-height:100vh;position:relative;z-index:1">
+    <div style="padding:11px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.07);background:rgba(0,0,0,.3);backdrop-filter:blur(10px);position:sticky;top:0;z-index:10">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-size:18px">👑</span>
+        <span class="num" style="font-size:13px;font-weight:800;color:#00d4ff;letter-spacing:1px">CLASS FUND v2</span>
+        <span style="font-size:9px;color:rgba(255,255,255,.3);background:rgba(255,255,255,.07);padding:2px 7px;border-radius:10px">ADMIN</span>
+      </div>
+      <div style="display:flex;gap:6px">
+        <button class="btn-g" onclick="ss({view:'lb_admin'})" style="padding:5px 10px;font-size:11px">🏆</button>
+        <button class="btn-g" onclick="ss({session:null,view:'login'})" style="padding:5px 10px;font-size:11px;color:#ff6666;border-color:rgba(255,80,80,.18)">ออก</button>
+      </div>
+    </div>
+    <div style="padding:6px 14px;display:flex;gap:2px;overflow-x:auto;background:rgba(0,0,0,.12);border-bottom:1px solid rgba(255,255,255,.06)">
+      ${tabs.map(t=>`<button class="tab${tab===t.id?' on':''}" onclick="ss({adminTab:'${t.id}'})">${t.l}</button>`).join('')}
+    </div>
+    ${S.slipZoom?`<div onclick="ss({slipZoom:null})" style="position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:50;display:flex;align-items:center;justify-content:center;cursor:pointer">
+      <img src="${S.slipZoom}" style="max-width:90vw;max-height:90vh;border-radius:12px;object-fit:contain"/>
+      <div style="position:absolute;top:16px;right:16px;color:white;font-size:24px">✕</div>
+    </div>`:''}
+    <div style="padding:18px;max-width:980px;margin:0 auto">${body}</div>
+  </div>`;
+}
+
+function renderAdminOv(){
+  const{users,expenses,payments,savedBalance}=S;
+  const ok=payments.filter(p=>p.status==='verified');
+  const pend=payments.filter(p=>p.status==='pending').length;
+  const got=ok.reduce((s,p)=>{const e=expenses.find(x=>x.id===p.eid);return s+(e?.amount||0)},0);
+  const target=users.length*expenses.reduce((s,e)=>s+e.amount,0);
+  const pct=target?Math.min(100,(got/target)*100):0;
+  const stats=[
+    {l:'ยกมา ปี 2568',v:thb(savedBalance),c:'#f5c842',i:'🏦'},
+    {l:'เก็บได้ ปี 2569',v:thb(got),c:'#00dc64',i:'💵',sub:`${ok.length} รายการ`},
+    {l:'รวมทั้งหมด',v:thb(savedBalance+got),c:'#00d4ff',i:'💎'},
+    {l:'รอตรวจสอบ',v:`${pend}`,c:'#ffc800',i:'⏳',sub:'รายการ'},
+  ];
+  const rows=sortUsers(users).map((u,i)=>`
+    <tr style="border-bottom:1px solid rgba(255,255,255,.04);animation:slideIn .25s ease ${i*.02}s both">
+      <td style="padding:7px 10px;font-size:12px;white-space:nowrap">${u.name}<span style="color:rgba(255,255,255,.3);font-size:10px;margin-left:5px">${u.nick||''}</span></td>
+      ${expenses.map(e=>{const p=payments.find(x=>x.uid===u.id&&x.eid===e.id);return`<td style="text-align:center;padding:7px;font-size:15px">${p?.status==='verified'?'✅':p?.status==='pending'?'⏳':'❌'}</td>`;}).join('')}
+    </tr>`).join('');
+  return`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:18px">
+    ${stats.map((s,i)=>`<div class="glass" style="padding:18px;animation:fadeUp .4s ease ${i*.07}s both"><div style="font-size:22px;margin-bottom:7px">${s.i}</div><div class="num-lg" style="color:${s.c};font-size:22px">${s.v}</div><div style="font-size:11px;color:rgba(255,255,255,.38);margin-top:4px">${s.l}</div>${s.sub?`<div style="font-size:10px;color:rgba(255,255,255,.25);margin-top:1px">${s.sub}</div>`:''}</div>`).join('')}
+  </div>
+  ${target>0?`<div class="glass" style="padding:18px;margin-bottom:18px">
+    <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px;font-weight:600"><span>ความคืบหน้า ปี 2569</span><span class="num" style="color:#00dc64">${pct.toFixed(1)}% · ${thb(got)}/${thb(target)}</span></div>
+    <div class="pbar"><div class="pbar-fill" style="width:${pct.toFixed(1)}%;background:linear-gradient(90deg,#00d4ff,#00dc64)"></div></div>
+  </div>`:''}
+  <div class="glass" style="padding:18px;overflow-x:auto">
+    <div style="font-size:13px;font-weight:600;margin-bottom:12px">ตารางสถานะ (${users.length} คน)</div>
+    <table style="width:100%;border-collapse:collapse;font-size:11px;min-width:300px">
+      <thead><tr style="border-bottom:1px solid rgba(255,255,255,.09)">
+        <th style="text-align:left;padding:6px 10px;color:rgba(255,255,255,.38);font-weight:500">ชื่อ</th>
+        ${expenses.map(e=>`<th style="text-align:center;padding:6px 7px;color:rgba(255,255,255,.38);font-weight:500;font-size:10px;white-space:nowrap">${e.name.replace(/📚|🛡️|🎓/g,'').replace('เก็บเงินห้อง','ห้อง').trim()}</th>`).join('')}
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+  </div>`;
+}
+
+function renderAdminEx(){
+  const{expenses,payments,users}=S;
+  const rows=expenses.map((e,i)=>{
+    const paid=payments.filter(p=>p.eid===e.id&&p.status==='verified').length;
+    return`<div class="glass" style="padding:14px 16px;display:flex;align-items:center;gap:12px;animation:slideIn .3s ease ${i*.05}s both">
+      <div style="flex:1"><div style="font-weight:600;font-size:14px">${e.name}</div>${e.desc?`<div style="font-size:11px;color:rgba(255,255,255,.38);margin-top:2px">${e.desc}</div>`:''}</div>
+      <div style="text-align:right;margin-right:10px"><div class="num-sm" style="color:#00dc64">${thb(e.amount)}</div><div style="font-size:10px;color:rgba(255,255,255,.32);margin-top:2px">${paid}/${users.length} คน</div></div>
+      <button class="btn-d" onclick="delExp('${e.id}')" style="padding:5px 10px;font-size:11px">ลบ</button>
+    </div>`;
+  }).join('');
+  return`<div class="glass" style="padding:20px;margin-bottom:16px">
+    <h3 style="font-size:13px;font-weight:600;margin-bottom:12px">➕ เพิ่มรายการ</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <input id="exn" placeholder="ชื่อรายการ"/><input id="exa" type="number" placeholder="จำนวนเงิน"/>
+      <input id="exd" placeholder="รายละเอียด" style="grid-column:1/-1"/>
+      <button class="btn-p" onclick="addExp()" style="grid-column:1/-1">➕ เพิ่มรายการ</button>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:8px">${rows||`<div style="text-align:center;padding:40px;color:rgba(255,255,255,.3)">ยังไม่มีรายการ</div>`}</div>`;
+}
+
+function renderAdminMb(){
+  const{payments}=S;
+  const users=sortUsers(S.users);
+  const editId=S.editMbId;
+  const rows=users.map((u,i)=>{
+    const cnt=payments.filter(p=>p.uid===u.id&&p.status==='verified').length;
+    if(editId===u.id)return`<div class="glass" style="padding:14px;border:1px solid rgba(0,212,255,.3);animation:fadeUp .25s ease both">
+      <div style="font-size:11px;color:#00d4ff;font-weight:600;margin-bottom:10px">✏️ แก้ไข ${u.name}</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px">
+        <input id="en-${u.id}" value="${u.name}" placeholder="ชื่อ" style="grid-column:1/-1"/>
+        <input id="enk-${u.id}" value="${u.nick||''}" placeholder="ชื่อเล่น"/>
+        <input id="ep-${u.id}" value="${u.pin||''}" placeholder="PIN" maxlength="6"/>
+      </div>
+      <div style="display:flex;gap:7px;margin-top:8px">
+        <button class="btn-s" onclick="saveEditUser('${u.id}')" style="flex:1;padding:7px">💾 บันทึก</button>
+        <button class="btn-g" onclick="ss({editMbId:null})" style="flex:1;padding:7px">ยกเลิก</button>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,.07);padding-top:9px;margin-top:9px">
+        <div style="font-size:10px;color:rgba(255,255,255,.3);margin-bottom:6px">⚠️ โซนอันตราย</div>
+        <button onclick="resetUserPay('${u.id}')" class="btn-warn" style="width:100%;padding:7px">🗑️ ล้างข้อมูลการจ่ายเงินของคนนี้</button>
+      </div>
+    </div>`;
+    return`<div class="glass" style="padding:9px 14px;display:flex;align-items:center;gap:10px;animation:slideIn .25s ease ${i*.025}s both">
+      <div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,rgba(0,212,255,.18),rgba(167,139,250,.18));display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0">${u.name[1]||u.name[0]}</div>
+      <div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${u.name} <span style="color:rgba(255,255,255,.38);font-size:10px">${u.nick?'('+u.nick+')':''}</span></div>
+      <div style="font-size:10px;color:rgba(255,255,255,.32)">PIN: ${u.pin||'-'} · จ่าย ${cnt} รายการ</div></div>
+      <button onclick="ss({adminTab:'mb',editMbId:'${u.id}'})" style="background:rgba(0,212,255,.1);color:#00d4ff;border:1px solid rgba(0,212,255,.22);padding:4px 9px;border-radius:7px;font-size:10px;cursor:pointer;font-family:'Kanit',sans-serif;flex-shrink:0">✏️</button>
+      <button class="btn-d" onclick="delUser('${u.id}')" style="padding:4px 9px;font-size:10px;flex-shrink:0">ลบ</button>
+    </div>`;
+  }).join('');
+  return`<div class="glass" style="padding:20px;margin-bottom:16px">
+    <h3 style="font-size:13px;font-weight:600;margin-bottom:12px">➕ เพิ่มสมาชิก</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px">
+      <input id="mbn" placeholder="ชื่อ-นามสกุล" style="grid-column:1/3"/>
+      <input id="mbnk" placeholder="ชื่อเล่น"/>
+      <input id="mbp" placeholder="PIN" maxlength="6"/>
+      <button class="btn-p" onclick="addUser()" style="grid-column:1/-1">➕ เพิ่มสมาชิก</button>
+    </div>
+  </div>
+  <div style="font-size:11px;color:rgba(255,255,255,.38);margin-bottom:9px">สมาชิกทั้งหมด <span class="num" style="color:#00d4ff;font-weight:700">${S.users.length}</span> คน</div>
+  <div style="display:flex;flex-direction:column;gap:5px">${rows}</div>`;
+}
+
+function renderAdminVr(){
+  const{payments,users,expenses}=S;
+  const pend=payments.filter(p=>p.status==='pending');
+  if(!pend.length)return`<div class="glass" style="padding:50px;text-align:center;color:rgba(255,255,255,.35)"><div style="font-size:40px;margin-bottom:12px">✅</div><div style="font-size:15px">ตรวจสอบครบทุกรายการแล้ว!</div></div>`;
+  const aiSusp=pend.filter(p=>{try{const ai=JSON.parse(p.ai_verdict||'null');return ai&&ai.verdict==='suspicious';}catch{return false;}});
+  const aiFake=pend.filter(p=>{try{const ai=JSON.parse(p.ai_verdict||'null');return ai&&ai.verdict==='fake';}catch{return false;}});
+  const aiOk=pend.filter(p=>{try{const ai=JSON.parse(p.ai_verdict||'null');return ai&&ai.verdict==='likely_real';}catch{return false;}});
+  const header=aiFake.length?`<div style="background:rgba(255,60,60,.1);border:1px solid rgba(255,60,60,.25);border-radius:10px;padding:12px 15px;margin-bottom:14px;display:flex;align-items:center;gap:8px"><span style="font-size:16px">🚨</span><div><div style="font-size:13px;font-weight:600;color:#ff7070">${aiFake.length} รายการที่ AI ตรวจว่าผิดปกติ</div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:2px">ตรวจสอบรายการเหล่านี้ก่อน</div></div></div>`:'';
+  const rows=[...aiFake,...aiSusp,...pend.filter(p=>!aiFake.includes(p)&&!aiSusp.includes(p))].map((p,i)=>{
+    const u=users.find(x=>x.id===p.uid);const e=expenses.find(x=>x.id===p.eid);
+    let aiR=null;try{aiR=JSON.parse(p.ai_verdict||'null');}catch{}
+    const borderC=aiR?.verdict==='fake'?'rgba(255,60,60,.35)':aiR?.verdict==='suspicious'?'rgba(255,200,0,.25)':aiR?.verdict==='likely_real'?'rgba(0,220,100,.2)':'rgba(255,255,255,.09)';
+    return`<div class="glass" style="padding:16px;animation:slideIn .3s ease ${i*.06}s both;border:1px solid ${borderC}">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px">
+        <div><div style="font-weight:700;font-size:15px">${u?.name}</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.45);margin-top:2px">${e?.name} · ${thb(e?.amount||0)}</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.3);margin-top:2px">${fullDate(p.paidAt)}</div></div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
+          <span class="bp">รอตรวจ</span>
+          ${aiR?aiVerdict(aiR,true):`<span class="bai-err"><i class="ti ti-question-mark"></i>ไม่มี AI</span>`}
+        </div>
+      </div>
+      ${p.slip?`<div style="margin-bottom:12px;cursor:pointer" onclick="ss({slipZoom:'${p.slip}'})">
+        <img src="${p.slip}" style="max-width:100%;max-height:180px;border-radius:10px;object-fit:contain;border:1px solid rgba(255,255,255,.12);display:block"/>
+        <div style="font-size:10px;color:rgba(0,212,255,.6);margin-top:5px;text-align:center"><i class="ti ti-zoom-in" style="font-size:12px"></i> กดเพื่อขยาย</div>
+      </div>`:`<div style="padding:18px;text-align:center;color:rgba(255,255,255,.28);font-size:12px;margin-bottom:12px">ไม่มีสลิป</div>`}
+      ${aiR&&!aiR.issues?.length&&aiR.verdict==='likely_real'?'':aiR?aiVerdict(aiR,false):''}
+      <div style="display:flex;gap:8px">
+        <button class="btn-s" onclick="approvePayment('${p.id}')" style="flex:1">✅ อนุมัติ</button>
+        <button class="btn-d" onclick="rejectPayment('${p.id}')" style="flex:1">❌ ปฏิเสธ</button>
+      </div>
+    </div>`;
+  }).join('');
+  return`<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+    <h3 style="font-size:13px;font-weight:600">รอตรวจสอบ <span class="num" style="color:#ffc800">${pend.length}</span> รายการ</h3>
+    ${aiOk.length?`<button class="btn-s" onclick="batchApprove()" style="font-size:12px;padding:7px 14px">✅ อนุมัติ AI-ผ่าน ทั้งหมด (${aiOk.length})</button>`:''}
+  </div>
+  ${header}
+  <div style="display:flex;flex-direction:column;gap:14px">${rows}</div>`;
+}
+
+function renderAdminQR(){
+  const{qr}=S;
+  return`<div style="max-width:480px">
+    <div class="glass" style="padding:24px">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:16px">📱 QR Code พร้อมเพย์</h3>
+      ${qr?`<div style="text-align:center">
+        <div style="display:inline-block;padding:12px;background:white;border-radius:16px;box-shadow:0 0 30px rgba(0,212,255,.25)"><img src="${qr}" style="max-width:200px;max-height:200px;display:block;border-radius:8px"/></div>
+        <div style="margin-top:12px;font-size:13px;font-weight:500">นายนิติพัฒน์ ปัณราช</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.35);margin-bottom:14px">Thai QR Payment · PromptPay</div>
+        <div style="display:flex;gap:8px;justify-content:center">
+          <button class="btn-p" onclick="document.getElementById('qri').click()">เปลี่ยน QR</button>
+          <button class="btn-g" onclick="clearQR()">ลบ</button>
+        </div>
+      </div>`:`<div onclick="document.getElementById('qri').click()" style="border:2px dashed rgba(255,255,255,.13);border-radius:12px;padding:46px;text-align:center;cursor:pointer" onmouseover="this.style.borderColor='#00d4ff'" onmouseout="this.style.borderColor='rgba(255,255,255,.13)'">
+        <i class="ti ti-qrcode" style="font-size:42px;color:rgba(255,255,255,.3);display:block;margin-bottom:10px"></i>
+        <div style="font-size:14px;font-weight:500">อัปโหลด QR Code</div>
+      </div>`}
+      <input id="qri" type="file" accept="image/*" onchange="uploadQR(this)" style="display:none"/>
+    </div>
+  </div>`;
+}
+
+function renderAdminBal(){
+  const{savedBalance,payments,expenses}=S;
+  const got=payments.filter(p=>p.status==='verified').reduce((s,p)=>{const e=expenses.find(x=>x.id===p.eid);return s+(e?.amount||0)},0);
+  return`<div style="max-width:480px">
+    <div class="glass" style="padding:24px">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:18px">💵 ยอดเงินสะสม</h3>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:22px">
+        ${[{l:'ยอดสะสม ปี 2568',v:thb(savedBalance),c:'#f5c842'},{l:'เก็บได้ ปี 2569',v:thb(got),c:'#00dc64'},{l:'รวมทั้งหมด',v:thb(savedBalance+got),c:'#00d4ff'}].map(s=>`<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;text-align:center"><div style="font-size:11px;color:rgba(255,255,255,.38);margin-bottom:5px">${s.l}</div><div class="num-lg" style="color:${s.c}">${s.v}</div></div>`).join('')}
+      </div>
+      <div style="font-size:12px;font-weight:600;margin-bottom:8px;color:rgba(255,255,255,.55)">✏️ แก้ไขยอดสะสม ปี 2568</div>
+      <div style="display:flex;gap:8px">
+        <input id="bali" type="number" value="${savedBalance}"/>
+        <button class="btn-s" onclick="updateBal()" style="white-space:nowrap">บันทึก</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderLBAdmin(){
+  const fake=`<div style="min-height:100vh;position:relative;z-index:1">
+    <div style="padding:11px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(255,255,255,.07);background:rgba(0,0,0,.3);backdrop-filter:blur(10px);position:sticky;top:0;z-index:10">
+      <button class="btn-g" onclick="ss({view:'admin'})" style="padding:6px 10px;font-size:11px">← กลับ</button>
+      <h1 class="num" style="font-size:20px;font-weight:900;background:linear-gradient(135deg,#f5c842,#ff9500,#f5c842);background-size:200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 3s linear infinite">🏆 LEADERBOARD</h1>
+    </div>
+    <div style="padding:20px;max-width:700px;margin:0 auto">${renderUserLB().replace('</div>','')}</div>
+  </div>`;
+  return fake;
+}
+
+// ── ACTIONS ──
+function togglePay(id){
+  const sel=S.paySelected||[];
+  const idx=sel.indexOf(id);
+  if(idx>=0)ss({paySelected:sel.filter(x=>x!==id)});
+  else ss({paySelected:[...sel,id]});
+}
+
+function goToQR(){if((S.paySelected||[]).length===0)return;ss({payStep:2});}
+
+async function onSlipUpload(input){
+  const f=input.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=async ev=>{
+    const slip=ev.target.result;
+    const sel=S.paySelected||[];
+    const items=sel.map(id=>S.expenses.find(e=>e.id===id)).filter(Boolean);
+    const total=items.reduce((s,e)=>s+e.amount,0);
+    ss({paySlip:slip,payAiResult:null,payAiLoading:true});
+    await verifySlip(slip,total,items);
+  };
+  r.readAsDataURL(f);
+}
+
+function clearSlip(){ss({paySlip:null,payAiResult:null,payAiLoading:false});}
+
+async function submitPay(uid,eids){
+  const slip=S.paySlip;
+  if(!slip)return;
+  const hash=hashSlip(slip);
+  const aiJson=S.payAiResult?JSON.stringify(S.payAiResult):null;
+  const rows=eids.map(eid=>({id:'p'+Date.now()+Math.random().toString(36).slice(2),uid,eid,status:'pending',paid_at:Date.now(),slip,slip_hash:hash,ai_verdict:aiJson}));
+  S.payments=[...S.payments,...rows.map(r=>({...r,paidAt:r.paid_at}))];
+  ss({payStep:3});
+  for(const row of rows){
+    await db.from('payments').insert({id:row.id,uid:row.uid,eid:row.eid,status:'pending',paid_at:row.paid_at,slip:row.slip,slip_hash:row.slip_hash,ai_verdict:row.ai_verdict});
+  }
+  showToast('ส่งสำเร็จ! รอ Admin ยืนยัน ✅','success');
+}
+
+async function approvePayment(id){
+  S.payments=S.payments.map(p=>p.id===id?{...p,status:'verified'}:p);ss({});
+  await db.from('payments').update({status:'verified'}).eq('id',id);
+  showToast('อนุมัติแล้ว ✅','success');
+}
+
+async function rejectPayment(id){
+  S.payments=S.payments.filter(p=>p.id!==id);ss({});
+  await db.from('payments').delete().eq('id',id);
+  showToast('ปฏิเสธแล้ว');
+}
+
+async function batchApprove(){
+  const pend=S.payments.filter(p=>{try{const ai=JSON.parse(p.ai_verdict||'null');return p.status==='pending'&&ai?.verdict==='likely_real';}catch{return false;}});
+  for(const p of pend){
+    S.payments=S.payments.map(x=>x.id===p.id?{...x,status:'verified'}:x);
+    await db.from('payments').update({status:'verified'}).eq('id',p.id);
+  }
+  ss({});showToast(`อนุมัติ ${pend.length} รายการ ✅`,'success');
+}
+
+async function addExp(){
+  const name=document.getElementById('exn')?.value?.trim();
+  const amt=+document.getElementById('exa')?.value;
+  const desc=document.getElementById('exd')?.value?.trim()||'';
+  if(!name||!amt)return;
+  const e={id:'e'+Date.now(),name,amount:amt,desc,at:Date.now()};
+  S.expenses=[...S.expenses,e];ss({});
+  await db.from('expenses').insert({id:e.id,name:e.name,amount:e.amount,desc:e.desc,at:e.at});
+}
+
+async function delExp(id){S.expenses=S.expenses.filter(e=>e.id!==id);ss({});await db.from('expenses').delete().eq('id',id);}
+
+async function addUser(){
+  const name=document.getElementById('mbn')?.value?.trim();
+  const nick=document.getElementById('mbnk')?.value?.trim()||'';
+  const pin=document.getElementById('mbp')?.value?.trim()||'';
+  if(!name)return;
+  const u={id:'u'+Date.now(),name,nick,pin};
+  S.users=[...S.users,u];ss({});
+  await db.from('users').insert(u);
+}
+
+async function saveEditUser(id){
+  const name=document.getElementById('en-'+id)?.value?.trim();
+  const nick=document.getElementById('enk-'+id)?.value?.trim()||'';
+  const pin=document.getElementById('ep-'+id)?.value?.trim()||'';
+  if(!name)return;
+  S.users=S.users.map(u=>u.id===id?{...u,name,nick,pin}:u);
+  ss({editMbId:null});
+  await db.from('users').update({name,nick,pin}).eq('id',id);
+}
+
+async function delUser(id){
+  S.users=S.users.filter(u=>u.id!==id);S.payments=S.payments.filter(p=>p.uid!==id);ss({});
+  await db.from('payments').delete().eq('uid',id);
+  await db.from('users').delete().eq('id',id);
+}
+
+async function resetUserPay(id){
+  S.payments=S.payments.filter(p=>p.uid!==id);ss({editMbId:null});
+  await db.from('payments').delete().eq('uid',id);
+  showToast('ล้างข้อมูลการจ่ายแล้ว ✅');
+}
+
+function clearQR(){S.qr=null;ss({});db.from('config').upsert({key:'qr',value:''});}
+function uploadQR(input){const f=input.files[0];if(!f)return;const r=new FileReader();r.onload=async ev=>{S.qr=ev.target.result;ss({});await db.from('config').upsert({key:'qr',value:ev.target.result});};r.readAsDataURL(f);}
+async function updateBal(){const v=+document.getElementById('bali')?.value;if(isNaN(v)||v<0)return;S.savedBalance=v;ss({});await db.from('config').upsert({key:'savedBalance',value:String(v)});showToast('บันทึกแล้ว ✅','success');}
+
+function bindEvents(){
+  document.querySelectorAll('[data-login="admin"]').forEach(el=>el.addEventListener('click',showAdminForm));
+  document.querySelectorAll('[data-login="user"]').forEach(el=>el.addEventListener('click',showUserForm));
+  const ap=document.getElementById('apw');if(ap)ap.addEventListener('keydown',e=>{if(e.key==='Enter')doAdminLogin();});
+  const up=document.getElementById('upin');if(up)up.addEventListener('keydown',e=>{if(e.key==='Enter')doUserLogin();});
+}
+
+function render(){
+  const app=document.getElementById('app');
+  if(S.loading){
+    app.innerHTML=`<div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;position:relative;z-index:1">
+      <div style="font-size:48px;animation:floatY 1.8s ease-in-out infinite">🏦</div>
+      <div class="num" style="font-size:15px;font-weight:700;color:#00d4ff;letter-spacing:2px">CLASS FUND v2</div>
+      <div style="display:flex;gap:5px">${[0,1,2].map(i=>`<div style="width:7px;height:7px;border-radius:50%;background:#00d4ff;animation:pulse 1.2s ease-in-out ${i*.2}s infinite"></div>`).join('')}</div>
+      <div style="font-size:11px;color:rgba(255,255,255,.3)">กำลังโหลดข้อมูล...</div>
+    </div>`;
+    renderStars();return;
+  }
+  let html='';
+  if(S.view==='login')html=renderLogin();
+  else if(S.view==='admin')html=renderAdmin();
+  else if(S.view==='lb_admin')html=renderLBAdmin();
+  else if(S.view==='user')html=renderUser();
+  app.style.transition='opacity .15s ease';
+  app.style.opacity='0';
+  app.innerHTML=html+renderToast();
+  requestAnimationFrame(()=>{app.style.opacity='1';});
+  bindEvents();renderStars();
+}
+
+async function initApp(){
+  S.loading=true;render();
+  const ok=await loadData();
+  if(!ok){
+    S.loading=false;
+    document.getElementById('app').innerHTML=`<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px"><div class="glass" style="padding:32px;max-width:460px;text-align:center"><div style="font-size:40px;margin-bottom:12px">⚙️</div><h2 style="font-size:16px;font-weight:600;margin-bottom:10px">ยังไม่ได้ตั้งค่า Supabase</h2><p style="font-size:12px;color:rgba(255,255,255,.42);line-height:1.8">ตรวจสอบ SUPABASE_URL และ SUPABASE_KEY ในไฟล์ HTML</p></div></div>`;
+    return;
+  }
+  S.loading=false;
+  subscribeRealtime();
+  render();
+}
+
+initApp();
+</script>
+</body>
+</html>
